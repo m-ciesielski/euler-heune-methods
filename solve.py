@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import argparse
 from matplotlib import pyplot as plt
 import numpy
@@ -72,9 +74,7 @@ def draw_plots(a, b, h, freq=200, additional_polynomial=None, additional_nodes=N
     # Plot exact solution
     y = [exact_result_value(x_i) for x_i in eq_grid]
     ax1 = figure.add_subplot(211)
-    ax1.plot(eq_grid, y, label="Rozwiazanie dokładne")
-
-
+    ax1.plot(eq_grid, y, label="Rozwiazanie dokladne")
 
     # Plot Euler method
     euler_results = euler_method(a, b, h)
@@ -97,10 +97,10 @@ def draw_plots(a, b, h, freq=200, additional_polynomial=None, additional_nodes=N
     # Draw error plots
 
     euler_error_ax = figure.add_subplot(212)
-    euler_error_ax.plot(eq_grid, method_error(euler_results, eq_grid), label="Bład metody Eulera")
+    euler_error_ax.plot(eq_grid, method_error(euler_results, eq_grid), label="Blad metody Eulera")
 
     heune_error_ax = figure.add_subplot(212)
-    heune_error_ax.plot(eq_grid, method_error(heune_results, eq_grid), label="Bład metody Heune'a")
+    heune_error_ax.plot(eq_grid, method_error(heune_results, eq_grid), label="Blad metody Heune'a")
 
     plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=2,
            ncol=2, mode="expand", borderaxespad=0.)
@@ -116,7 +116,7 @@ def parse_user_provided_float(label):
         try:
             val = float(input("Type {0}:".format(label)))
         except ValueError:
-            print("Podaj poprawną wartość dla zmiennej:  {0}.".format(label))
+            print("Podaj poprawna warosc dla zmiennej:  {0}.".format(label))
             continue
         else:
             break
@@ -126,22 +126,22 @@ def parse_user_provided_float(label):
 
 def parseargs():
     parser = argparse.ArgumentParser(description='Metody Heune\'a i Eulera.')
-    parser.add_argument('--step-length', type=float, help='Długość kroku.')
-    parser.add_argument('--start', type=float, help='Początek przedziału wartości X.')
-    parser.add_argument('--end', type=float, help='Koniec przedziału wartości X.')
+    parser.add_argument('--step-length', type=float, help='Dlugosc kroku.')
+    parser.add_argument('--start', type=float, help='Poczatek przedzialu wartosci X.')
+    parser.add_argument('--end', type=float, help='Koniec przedzialu wartosci X.')
     parsed_args = parser.parse_args()
 
     if not parsed_args.start:
-        parsed_args.start = parse_user_provided_float("podaj wartośc a (początek przedziału wartości X)")
+        parsed_args.start = parse_user_provided_float("podaj wartosc a (poczatek przedzialu wartosci X)")
 
     if not parsed_args.end:
-        parsed_args.end = parse_user_provided_float("podaj wartość b (koniec przedziału wartości X)")
+        parsed_args.end = parse_user_provided_float("podaj wartosc b (koniec przedzialu wartosci X)")
 
     if not parsed_args.step_length:
-        parsed_args.step_length = parse_user_provided_float("podaj h (długość kroku)")
+        parsed_args.step_length = parse_user_provided_float("podaj h (dlugosc kroku)")
         while parsed_args.step_length <= 0 or parsed_args.step_length > (parsed_args.end - parsed_args.start):
-            print("Długość kroku musi być większa od zera i mniejsza niż długość przedziału.")
-            parsed_args.step_length = parse_user_provided_float("podaj h (długość kroku)")
+            print("Dlugosc kroku musi byc większa od zera i mniejsza niż dlugosc przedzialu.")
+            parsed_args.step_length = parse_user_provided_float("podaj h (dlugosc kroku)")
 
     return parsed_args
 
