@@ -61,7 +61,7 @@ def euler_method(a, b, h):
     return y
 
 
-def draw_plots(a, b, h, freq=200, additional_polynomial=None, additional_nodes=None):
+def draw_plots(a, b, h):
     """
     Draws interpolation plot for given interpolation polynomial and nodes.
     """
@@ -114,9 +114,9 @@ def parse_user_provided_float(label):
     val = None
     while True:
         try:
-            val = float(input("Type {0}:".format(label)))
+            val = float(input("Podaj {0}:".format(label)))
         except ValueError:
-            print("Podaj poprawna warosc dla zmiennej:  {0}.".format(label))
+            print("Podaj poprawna wartosc dla zmiennej:  {0}.".format(label))
             continue
         else:
             break
@@ -132,16 +132,16 @@ def parseargs():
     parsed_args = parser.parse_args()
 
     if not parsed_args.start:
-        parsed_args.start = parse_user_provided_float("podaj wartosc a (poczatek przedzialu wartosci X)")
+        parsed_args.start = parse_user_provided_float("wartosc a (poczatek przedzialu wartosci X)")
 
     if not parsed_args.end:
-        parsed_args.end = parse_user_provided_float("podaj wartosc b (koniec przedzialu wartosci X)")
+        parsed_args.end = parse_user_provided_float("wartosc b (koniec przedzialu wartosci X)")
 
     if not parsed_args.step_length:
-        parsed_args.step_length = parse_user_provided_float("podaj h (dlugosc kroku)")
+        parsed_args.step_length = parse_user_provided_float("h (dlugosc kroku)")
         while parsed_args.step_length <= 0 or parsed_args.step_length > (parsed_args.end - parsed_args.start):
             print("Dlugosc kroku musi byc większa od zera i mniejsza niż dlugosc przedzialu.")
-            parsed_args.step_length = parse_user_provided_float("podaj h (dlugosc kroku)")
+            parsed_args.step_length = parse_user_provided_float("h (dlugosc kroku)")
 
     return parsed_args
 
